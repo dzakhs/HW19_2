@@ -6,7 +6,7 @@ from catalog.models import Category
 class Command(BaseCommand):
     def handle(self, *args, **options):
         category_list= [
-            {"name":"Смартфоны"  , "description": "Смартфоны"},
+            {"name":"Смартфоны", "description": "Смартфоны"},
             {"name":"Телевизоры", "description":"Телевизоры"},
             {"name":"Компьютеры", "description":"Компьютеры, ноутбуки, планшеты"},
             {"name":"Холодильники", "description":"Бытовая техника"},
