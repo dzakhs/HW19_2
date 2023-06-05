@@ -10,7 +10,7 @@
                     {% for object in object_list %}
                         <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" data-src="{% media_path object.image %}" alt="Card image cap" width="304" height="228">
+                                <img class="card-img-top" src="{% media_path object.image %}" alt="Изображение недоступно" width="304" height="228">
                                 <div class="card-body">
                                     <p class="card-text">{{ object }}{{ object.category }}.</p>
                                     <div class="d-flex justify-content-between align-items-center">

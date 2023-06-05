@@ -6,13 +6,15 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
+
                 {% for object in object_list %}
                     <div class="col-md-4">
                                 <div class="card mb-4 box-shadow">
-                                    <img class="card-img-top" data-src="{% media_path object.image %} alt="Card image cap" width="304" height="228" >
+                                    <img class="card-img-top" src="{% media_path object.image %}" alt="Изображение недоступно" width="304" height="228" >
                                         <div class="card-body">
-                                            <p class="card-text">{{ object }}.</p>
+                                            <p class="card-text">{{ object.name }}.</p>
                                             <p class="card-text">{{ object.category }}.</p>
+                                            <p class="card-text">{{ object.description }}.</p>
                                             <p class="card-text">{{ object.price }}.</p>
                                             <p class="card-text">{{ object.creat_date }}.</p>
                                         </div>
