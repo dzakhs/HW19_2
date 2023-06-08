@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+{% load mytags %}
+{% load static %}
+
+{% block content %}
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{% media_path blog.image %}" alt="Изображение недоступно"
+                             width="304" height="228">
+                        <div class="card-body">
+                            <p class="card-text">{{ blog.name }}.</p>
+                            <p class="card-text">{{ blog.content }}.</p>
+                            <p class="card-text">{{ blog.create_date }}.</p>
+
+                        </div>
+                    </div>
+                    <a href="{% url 'catalog:blog_list' %}" class="btn btn-primary"><< Назад</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

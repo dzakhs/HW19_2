@@ -34,3 +34,34 @@ class Product(models.Model):
         verbose_name_plural = 'продукты'
         ordering = ('name',)
 
+
+class Contacts(models.Model):
+    name = models.CharField(max_length=255, verbose_name='имя')
+    email = models.CharField(max_length=150, verbose_name='e-mail')
+    message = models.TextField(**NULLABLE)
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta():
+        verbose_name = 'контакт'
+        verbose_name_plural = 'контакты'
+
+
+
+class Blog(models.Model):
+    name = models.CharField(max_length=255, verbose_name='заголовок')
+    slug = models.CharField(max_length=255, verbose_name='slug', unique=True)
+    content = models.TextField(verbose_name='контент', **NULLABLE)
+    image = models.ImageField(upload_to='blog/', verbose_name='превью', **NULLABLE)
+    create_date = models.DateTimeField(auto_now=True, verbose_name='дата создания')
+    is_published = models.BooleanField(default=True)
+    view_count = models.IntegerField(default=0, verbose_name='количество просмотров')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta():
+        verbose_name = 'блог'
+        verbose_name_plural = 'блоги'
+        ordering = ('create_date',)
