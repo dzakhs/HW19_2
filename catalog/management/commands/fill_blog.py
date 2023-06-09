@@ -6,10 +6,10 @@ from catalog.models import Blog
 class Command(BaseCommand):
     def handle(self, *args, **options):
         blog_list= [
-            {"id": 1, "name": "Реки", "content": "Рассказ про сплав по очень опасной реке", "image": "blog/media/river.jpg"},
-            {"id": 2,"name": "Горы", "content": "Невероятный рассказ про горы",
+            {"id": 1, "name": "Реки", "slug": "reki", "content": "Рассказ про сплав по очень опасной реке", "image": "blog/media/river.jpg"},
+            {"id": 2,"name": "Горы", "slug": "gori","content": "Невероятный рассказ про горы",
              "image": "blog/media/Mountain.jpg"},
-            {"id": 3,"name": "Пещеры", "content": "Увлекательные факты про какие-то затерянные пещеры",
+            {"id": 3,"name": "Пещеры", "slug": "peschery","content": "Увлекательные факты про какие-то затерянные пещеры",
              "image": "blog/media/Hall.jpg"},
 
 

@@ -21,3 +21,4 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'is_published', 'view_count', 'slug')
     list_filter = ('view_count',)
     search_fields = ('name', 'content',)
+    prepopulated_fields = {"slug": ("name",)}
