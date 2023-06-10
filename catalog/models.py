@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -60,6 +61,12 @@ class Blog(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
     class Meta():
         verbose_name = 'блог'
