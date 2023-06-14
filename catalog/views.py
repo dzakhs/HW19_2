@@ -39,7 +39,7 @@ class BlogDetailView(generic.DetailView):
     def get_object(self, queryset=Blog):
         object = super().get_object()
         object.view_count += 1
-        object.save
+        object.save()
         return object
 
 
