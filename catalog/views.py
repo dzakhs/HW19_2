@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views import generic
 
+from catalog.forms import ProductForm
 from catalog.models import Product, Contacts, Blog
 
 
@@ -14,7 +15,25 @@ class IndexListView(generic.ListView):
 class ProductListView(generic.ListView):
     model = Product
 
+class ProductCreateView(generic.CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:index')
 
+
+class ProductUpdateView(generic.UpdateView):
+    model = Product
+    form_class = ProductForm
+
+    success_url = reverse_lazy('catalog:index')
+
+class ProductDetailView(generic.DetailView):
+    model = Product
+
+
+class ProductDeleteView(generic.DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:index')
 
 class ContactsListView(generic.ListView):
     model = Contacts

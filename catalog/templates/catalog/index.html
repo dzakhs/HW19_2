@@ -5,7 +5,8 @@
 
 <div class="album py-5 bg-light">
         <div class="container">
-
+            <div class="button">
+                <p><a class="btn btn-secondary" href="{% url 'catalog:product_create' %}" role="button">Создать продукт &raquo;</a></p>
                 <div class="row">
                     {% for object in object_list %}
                         <div class="col-md-4">
@@ -15,7 +16,9 @@
                                     <p class="card-text">{{ object }}{{ object.category }}.</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <p><a class="btn btn-secondary" href="{% url 'catalog:product' %}" role="button">View details &raquo;</a></p>
+                                                    <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' pk=object.id %}" role="button">Подробнее &raquo;</a></p>
+                                                    <p><a class="btn btn-secondary" href="{% url 'catalog:product_update' object.id %}" role="button">Изменить &raquo;</a></p>
+                                                    <p><a class="btn btn-secondary" href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить &raquo;</a></p>
                                         </div>
                                         <small class="text-muted">{{ object.creat_date}}</small>
                                     </div>
@@ -24,6 +27,7 @@
                         </div>
                     {% endfor %}
                 </div>
+            </div>>
         </div>
 </div>
 {% endblock %}
