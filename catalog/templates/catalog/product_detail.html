@@ -13,8 +13,17 @@
                         <div class="card-body">
                             <p class="card-text">{{ product.name }}.</p>
                             <p class="card-text">{{ product.description }}.</p>
-                            <p class="card-text">{{ blog.create_date }}.</p>
-                            <p class="card-text">{{product.price }}.</p>
+                            <p class="card-text">{{ product.creat_date }}.</p>
+                            <p class="card-text">{{ product.price }}.</p>
+                                {% for version in product.version.all %}
+                                    <p class="card-text">
+                                        {% if version.is_version %}
+                                        Версия: {{ version.version_title }}
+                                        Номер версии: {{ version.version_num }}
+                                        {% endif %}
+                                    </p>
+
+                                {%  endfor %}`
 
                         </div>
                     </div>

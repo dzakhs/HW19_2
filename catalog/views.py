@@ -1,10 +1,11 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views import generic
 
-from catalog.forms import ProductForm
-from catalog.models import Product, Contacts, Blog
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Contacts, Blog, Version
 
 
 class IndexListView(generic.ListView):
@@ -20,13 +21,53 @@ class ProductCreateView(generic.CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            formset = VersionFormset(self.request.POST)
+        else:
+            formset = VersionFormset()
+
+        context_data['formset'] = formset
+
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
+
 
 class ProductUpdateView(generic.UpdateView):
     model = Product
     form_class = ProductForm
-
     success_url = reverse_lazy('catalog:index')
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            formset = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            formset = VersionFormset(instance=self.object)
+
+        context_data['formset'] = formset
+
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
 class ProductDetailView(generic.DetailView):
     model = Product
 

@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 
 class ProductForm(forms.ModelForm):
@@ -15,6 +15,26 @@ class ProductForm(forms.ModelForm):
                 raise forms.ValidationError(f'Запрещено использовать слово "{word}" в названии или описании продукта.')
         return cleaned_data
 
+     def _init__(self, *args, **kwargs):
+         super().__init__(*args, **kwargs)
+         for field_name, field in self.fields.items():
+             field.widget.attrs['class'] = 'form-control'
+
      class Meta:
          model = Product
          fields = '__all__'
+
+
+
+
+
+class VersionForm(forms.ModelForm):
+
+    class Meta:
+        model = Version
+        fields = '__all__'
+
+    def _init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
