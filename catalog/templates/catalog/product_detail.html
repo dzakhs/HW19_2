@@ -15,19 +15,21 @@
                             <p class="card-text">{{ product.description }}.</p>
                             <p class="card-text">{{ product.creat_date }}.</p>
                             <p class="card-text">{{ product.price }}.</p>
-                                {% for version in product.version.all %}
-                                    <p class="card-text">
-                                        {% if version.is_version %}
+                            {% for version in product.version.all %}
+                                <p class="card-text">
+                                    {% if version.is_version %}
                                         Версия: {{ version.version_title }}
                                         Номер версии: {{ version.version_num }}
-                                        {% endif %}
-                                    </p>
+                                    {% endif %}
+                                </p>
 
-                                {%  endfor %}`
+                            {%  endfor %}`
 
                         </div>
                     </div>
                     <a href="{% url 'catalog:product' %}" class="btn btn-primary"><< Назад</a>
+                    <a href="{% url 'catalog:product_update' object.id %}" role="button">Изменить</a>
+                    <a href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить</a>
                 </div>
 
             </div>

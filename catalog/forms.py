@@ -15,7 +15,7 @@ class ProductForm(forms.ModelForm):
                 raise forms.ValidationError(f'Запрещено использовать слово "{word}" в названии или описании продукта.')
         return cleaned_data
 
-     def _init__(self, *args, **kwargs):
+     def __init__(self, *args, **kwargs):
          super().__init__(*args, **kwargs)
          for field_name, field in self.fields.items():
              field.widget.attrs['class'] = 'form-control'
@@ -34,7 +34,14 @@ class VersionForm(forms.ModelForm):
         model = Version
         fields = '__all__'
 
-    def _init__(self, *args, **kwargs):
+
+    #def clean_is_version(self):
+    #    is_version = self.cleaned_data.get('is_version')
+    #    product = self.cleaned_data.get('product')
+#
+    #    Version.objects.filter(product=product).exclude(id=self.instance.id).update(is_version=False)
+
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'

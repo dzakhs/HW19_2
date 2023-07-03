@@ -30,7 +30,9 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.name} '
 
-
+    @property
+    def active_version(self):
+        return self.version_set.get(current_version=True)
 
     class Meta:
         verbose_name = 'продукт'

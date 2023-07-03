@@ -21,6 +21,7 @@ class ProductCreateView(generic.CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
 
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
@@ -34,7 +35,9 @@ class ProductCreateView(generic.CreateView):
         return context_data
 
     def form_valid(self, form):
+        context_data = self.get_context_data()
         formset = self.get_context_data()['formset']
+        self.object = form.save()
 
         if formset.is_valid():
             formset.instance = self.object
@@ -61,13 +64,18 @@ class ProductUpdateView(generic.UpdateView):
         return context_data
 
     def form_valid(self, form):
+        context_data = self.get_context_data()
         formset = self.get_context_data()['formset']
+        self.object = form.save()
 
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
 
         return super().form_valid(form)
+
+
+
 class ProductDetailView(generic.DetailView):
     model = Product
 
