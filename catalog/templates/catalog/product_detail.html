@@ -15,7 +15,8 @@
                             <p class="card-text">{{ product.description }}.</p>
                             <p class="card-text">{{ product.creat_date }}.</p>
                             <p class="card-text">{{ product.price }}.</p>
-                            {% for version in product.version.all %}
+                            {{ product.version.all }}
+                            {% for version in product.version_set.all %}
                                 <p class="card-text">
                                     {% if version.is_version %}
                                         Версия: {{ version.version_title }}
