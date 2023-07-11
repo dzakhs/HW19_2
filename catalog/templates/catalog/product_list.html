@@ -17,11 +17,16 @@
                                             <p class="card-text">{{ object.description }}.</p>
                                             <p class="card-text">{{ object.price }}.</p>
                                             <p class="card-text">{{ object.creat_date }}.</p>
+                                            <p class="card-text">{{ object.owner }}.</p>
+                                            {% if user.is_authenticated %}
                                                 <div class="btn-group">
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' pk=object.id %}" role="button">Подробнее &raquo;</a></p>
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_update' object.id %}" role="button">Изменить &raquo;</a></p>
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить &raquo;</a></p>
                                                 </div>
+                                            {% else %}
+
+                                            {% endif %}
                                         </div>
                                 </div>
 

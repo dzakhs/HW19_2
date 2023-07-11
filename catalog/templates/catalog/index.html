@@ -15,11 +15,15 @@
                                 <div class="card-body">
                                     <p class="card-text">{{ object }}{{ object.category }}.</p>
                                     <div class="d-flex justify-content-between align-items-center">
+                                        {% if user.is_authenticated %}
                                         <div class="btn-group">
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' pk=object.id %}" role="button">Подробнее &raquo;</a></p>
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_update' object.id %}" role="button">Изменить &raquo;</a></p>
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить &raquo;</a></p>
                                         </div>
+                                        {% else %}
+
+                                        {% endif %}
                                         <small class="text-muted">{{ object.creat_date}}</small>
                                     </div>
                                 </div>

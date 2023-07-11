@@ -19,6 +19,9 @@
           <li class="nav-item active">
               <a class="nav-link" href="{% url 'users:logout' %}">Выход<span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'users:profile' %}">Редактировать профиль<span class="sr-only">(current)</span></a>
+          </li>
           {% else %}
           <li class="nav-item active">
               <a class="nav-link" href="{% url 'users:login' %}">Вход<span class="sr-only">(current)</span></a>

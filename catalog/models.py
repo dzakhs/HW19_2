@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
 
@@ -26,6 +27,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена')
     creat_date = models.DateField(auto_now=True, verbose_name='дата создания')
     change_date = models.DateField(auto_now=True, verbose_name='дата последнего изменения')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец')
+
 
     def __str__(self):
         return f'{self.name} '
