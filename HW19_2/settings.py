@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'users',
 ]
 
+SITE_NAME = '127.0.0.1:8000'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -140,3 +143,4 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
