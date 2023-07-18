@@ -29,8 +29,12 @@
                         </div>
                     </div>
                     <a href="{% url 'catalog:product' %}" class="btn btn-primary"><< Назад</a>
+                    {% if perms.catalog.change_product %}
                     <a href="{% url 'catalog:product_update' object.id %}" role="button">Изменить</a>
+                    {% endif %}
+                    {% if user.is_superuser  %}
                     <a href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить</a>
+                    {% endif %}
                 </div>
 
             </div>

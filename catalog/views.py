@@ -1,4 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.text import slugify
@@ -16,7 +18,7 @@ class IndexListView(generic.ListView):
 class ProductListView(generic.ListView):
     model = Product
 
-class ProductCreateView(generic.CreateView):
+class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
@@ -53,7 +55,7 @@ class ProductCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(generic.UpdateView):
+class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
@@ -81,15 +83,22 @@ class ProductUpdateView(generic.UpdateView):
 
         return super().form_valid(form)
 
-
+    def get_object(self, queryset=None):
+        object = super().get_object(queryset)
+        if object.owner != self.request.user:
+            raise Http404("Вы не являетесь владельцем продукта.")
+        return object
 
 class ProductDetailView(generic.DetailView):
     model = Product
 
 
-class ProductDeleteView(generic.DeleteView):
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:index')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 class ContactsListView(generic.ListView):
     model = Contacts

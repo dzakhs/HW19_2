@@ -21,8 +21,12 @@
                                             {% if user.is_authenticated %}
                                                 <div class="btn-group">
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' pk=object.id %}" role="button">Подробнее &raquo;</a></p>
+                                                    {% if perms.catalog.change_product %}
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_update' object.id %}" role="button">Изменить &raquo;</a></p>
+                                                    {% endif %}
+                                                    {% if user.is_superuser %}
                                                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_delete' object.id %}" role="button">Удалить &raquo;</a></p>
+                                                    {% endif %}
                                                 </div>
                                             {% else %}
 
